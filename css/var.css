@@ -1,0 +1,5 @@
+$margin-left: 40px;
+$margin-right: 60px;
+$sub-color: #777;
+$data-width: 600px;
+$mobile-width: $data-width + $margin-right + $margin-left;
