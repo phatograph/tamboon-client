@@ -2,176 +2,94 @@
 @import 'reset';
 
 body {
-  font-family: 'Lato', sans-serif;
-  font-size: 20px;
-
-  @media print {
-    font-size: 14px;
-  }
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-h1 {
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.4em;
-  text-transform: uppercase;
-  padding-bottom: 5px;
-
-  span.light {
-    color: #eaeaea;
-  }
-}
-
-h2 {
-  font-family: 'Fjalla One', sans-serif;
-}
-
-h6 {
-  font-size: 0.7em;
-  padding-bottom: 30px;
-  line-height: 1.2;
-  color: $sub-color;
-  text-transform: uppercase;
-}
-
-sup {
-  vertical-align: super;
-  font-size: 0.7em;
+  box-sizing: border-box;
+  font-family: Helvetica, Arial;
+  padding: 20px 0;
 }
 
 .container {
   margin: 0 auto;
+  width: 300px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 0 3px 2px #f1f1f1;
+  border-radius: 3px;
+}
 
-  padding: 30px 0;
-
-  @media (max-width: $mobile-width) {
-    padding: 30px 50px 30px 20px;
+.flash {
+  &:not(:empty) {
+    display: block;
+    border-width: 1px;
+    border-style: solid;
+    padding: 10px;
+    font-size: 11px;
+    margin: 10px 0;
   }
 
-  @media print {
-    font-size: 14px;
-    padding: 40px 60px 0 30px;
+  &:first-child {
+    margin-top: 0;
   }
 
-  @media (min-width: $mobile-width + 1px) {
-    width: $data-width;
-  }
-
-  @media print {
-    width: 580px;
-    padding-top: 20px;
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 
-.data {
-  tr {
-    td {
-      padding-top: 10px;
-      vertical-align: top;
-    }
+.flashError {
+  composes: flash;
+  color: red;
+  border-color: red;
+  background-color: rgba(255, 0, 0, 0.1);
+}
 
-    img.me {
-      $me-width: 124px;
-      width: $me-width;
-      border-radius: $me-width / 2;
-      margin-left: -5px;
-      margin-top: -3px;
+.flashSuccess {
+  composes: flash;
+  color: green;
+  border-color: green;
+  background-color: rgba(0, 255, 0, 0.1);
+}
 
-      @media (max-width: $mobile-width) {
-        $me-width: 100px;
-        width: $me-width;
-        border-radius: $me-width / 2;
-        margin-left: 0px;
-      }
+.list {
+  input {
+    margin: 0 10px 5px 0;
+  }
 
-      @media screen {
-        border: 1px solid #fff;
-        box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
-      }
-
-      @media print {
-        $me-width: 96px;
-        width: $me-width;
-        border-radius: $me-width / 2;
-        margin: -3px -15px 0 0;
-      }
-    }
-
-    .role {
-      @media (min-width: $mobile-width + 1) {
-        display: flex;
-      }
-    }
-
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      padding-bottom: 15px;
-
-      li {
-        width: 33%;
-        padding-bottom: 5px;
-
-        @media (max-width: $mobile-width) {
-          width: 50%;
-        }
-
-        @media print {
-          width: 25%;
-        }
-      }
-    }
-
-    h2 {
-      width: 100px;
-      padding-right: 45px;
-      text-transform: uppercase;
-      text-align: right;
-
-      @media (max-width: $mobile-width) {
-        width: 100px;
-        padding-right: 25px;
-      }
-
-      @media print {
-        padding-right: 35px;
-      }
-    }
-
-    h3 {
-      font-weight: bold;
-      font-size: 0.8em;
-      font-family: 'Roboto Condensed', sans-serif;;
-      text-transform: uppercase;
-      margin-right: 7px;
-    }
-
-    h4 {
-      font-size: 0.8em;
-      color: $sub-color;
-    }
-
-    h5 {
-      padding-top: 2px;
-      font-size: 0.7em;
-      color: $sub-color;
-    }
-
-    p {
-      padding: 15px 0 30px;
-      font-size: 0.7em;
-      letter-spacing: 0.4px;
-      line-height: 1.2;
-
-      @media print {
-        padding: 10px 0 20px;
-        font-size: 0.8em;
-        line-height: 1.1;
-      }
-    }
+  label {
+    font-size: 12px;
   }
 }
+
+.label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #777;
+  display: block;
+  margin: 0 0 7px;
+}
+
+.labelList {
+  composes: label;
+  margin: 15px 0 7px;
+}
+
+.submit {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  margin-top: 20px;
+  display: block;
+  width: 100%;
+  color: #555;
+  font-size: 18px;
+  padding: 10px 0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f7f7f7;
+  }
+
+  &:disabled {
+    cursor: progress;
+    color: #ccc;
+  }
+}
+

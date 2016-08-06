@@ -21,7 +21,6 @@ let App = React.createClass({
       .then((body) => { this.setState({ charities: body }); });
   },
   resetFlash() {
-    document.querySelector('#flash_error').innerHTML = '';
     document.querySelector('#flash_success').innerHTML = '';
     document.querySelector('#cc_error').innerHTML = '';
   },
@@ -61,7 +60,7 @@ let App = React.createClass({
             this.refs.commit.disabled = false;
 
             if (json.error) {
-              document.querySelector('#flash_error').innerHTML = json.error;
+              document.querySelector('#cc_error').innerHTML = json.error;
             }
             else {
               document.querySelector('#flash_success').innerHTML = json.message;
@@ -72,12 +71,10 @@ let App = React.createClass({
   },
   render() {
     return (
-      <div>
-        <div id="flash_error"></div>
-        <div id="flash_success"></div>
+      <div className={style.container}>
         <form onSubmit={this.onSubmit}>
-          <p>Pick a charity:</p>
-          <ul>
+          <h2 className={style.label}>Pick a charity:</h2>
+          <ul className={style.list}>
             {this.state.charities.map((charity, i) => {
               return (
                 <li key={i}>
@@ -93,30 +90,31 @@ let App = React.createClass({
           </ul>
 
           <div>
-            <label htmlFor="amount">Amount</label><br />
+            <label className={style.labelList} htmlFor="amount">Amount</label>
             <input type="number" ref="amount" id="amount" defaultValue="500" step="any" /> THB
           </div>
           <div>
-            Number<br />
+            <label className={style.labelList}>Number</label>
             <input type="text" id="" placeholder="XXXX XXXX XXXX XXXX" ref="number" defaultValue="4111111111111111" />
           </div>
           <div>
-            Name (as on card)<br />
+            <label className={style.labelList}>Name (as on card)</label>
             <input type="text" id="" placeholder="J DOE" ref="holder_name" defaultValue="pwang" />
           </div>
           <div>
-            Expires<br />
+            <label className={style.labelList}>Expires</label>
             <input type="text" id="" size="4" placeholder="XX" ref="expiration_month" defaultValue="10" />
-            /
+            &nbsp;/&nbsp;
             <input type="text" id="" size="4" placeholder="XX" ref="expiration_year" defaultValue="18" />
           </div>
           <div>
-            Security Code<br />
+            <label className={style.labelList}>Security Code</label>
             <input type="text" id="" size="8" placeholder="XXX" ref="security_code" defaultValue="111" />
           </div>
           <div>
-            <input type="submit" ref="commit" defaultValue="Donate" />
-            <span id="cc_error"></span>
+            <input className={style.submit} type="submit" ref="commit" defaultValue="Donate" />
+            <div id="cc_error" className={style.flashError}></div>
+            <div id="flash_success" className={style.flashSuccess}></div>
           </div>
           </form>
         </div>
