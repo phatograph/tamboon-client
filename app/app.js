@@ -20,10 +20,14 @@ let App = React.createClass({
       .then((res) => { return res.json(); })
       .then((body) => { this.setState({ charities: body }); });
   },
-  onSubmit(e) {
-    e.preventDefault();
+  resetFlash() {
+    document.querySelector('#flash_error').innerHTML = '';
     document.querySelector('#flash_success').innerHTML = '';
     document.querySelector('#cc_error').innerHTML = '';
+  },
+  onSubmit(e) {
+    e.preventDefault();
+    this.resetFlash();
     this.refs.commit.disabled = true;
 
     const card = {
@@ -55,7 +59,13 @@ let App = React.createClass({
           .then((res) => { return res.json(); })
           .then((json) => {
             this.refs.commit.disabled = false;
-            document.querySelector('#flash_success').innerHTML = json.message;
+
+            if (json.error) {
+              document.querySelector('#flash_error').innerHTML = json.error;
+            }
+            else {
+              document.querySelector('#flash_success').innerHTML = json.message;
+            }
           });
       };
     });
@@ -63,6 +73,7 @@ let App = React.createClass({
   render() {
     return (
       <div>
+        <div id="flash_error"></div>
         <div id="flash_success"></div>
         <form onSubmit={this.onSubmit}>
           <p>Pick a charity:</p>
