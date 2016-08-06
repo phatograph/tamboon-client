@@ -1,6 +1,7 @@
-var autoprefixer      = require('autoprefixer');
-var precss            = require('precss');
-var path              = require('path');
+var autoprefixer = require('autoprefixer');
+var precss       = require('precss');
+var path         = require('path');
+var webpack      = require('webpack')
 
 module.exports = {
   entry: [
@@ -30,6 +31,13 @@ module.exports = {
   postcss: function () {
     return [autoprefixer];
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env':{
+        'OMISE_PKEY': JSON.stringify(process.env.OMISE_PKEY)
+      }
+    }),
+  ],
   devServer: {
     colors: true,
     progress: true,
