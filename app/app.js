@@ -22,6 +22,8 @@ let App = React.createClass({
   },
   onSubmit(e) {
     e.preventDefault();
+    document.querySelector('#flash_success').innerHTML = '';
+    document.querySelector('#cc_error').innerHTML = '';
     this.refs.commit.disabled = true;
 
     const card = {
@@ -103,7 +105,7 @@ let App = React.createClass({
           </div>
           <div>
             <input type="submit" ref="commit" defaultValue="Donate" />
-            <span className="cc_error"></span>
+            <span id="cc_error"></span>
           </div>
           </form>
         </div>
