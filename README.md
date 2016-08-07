@@ -1,3 +1,6 @@
+A client for patched Tamboon application. Developed and tested 
+on Node.js v.5.5.0.
+
 ## Setup
 
 1. Clone the source.
@@ -38,9 +41,7 @@
 
 7. Enjoy!
 
----
-
-Stack being used.
+## Stack being used.
 
 - React
 - Webpack
