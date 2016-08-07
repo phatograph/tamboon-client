@@ -7,11 +7,12 @@ let createBrowserHistory = require('history/lib/createBrowserHistory');
 import CharitiesList from './components/CharitiesList';
 
 import style from './../css/style.css';
+import { donate } from './actions';
 
 const host = 'http://localhost:4001';
 Omise.setPublicKey(process.env.OMISE_PKEY);
 
-const App = React.createClass({
+const App = ({ dispatch }) => {
   getInitialState() {
     return {
       charities: []
@@ -39,6 +40,8 @@ const App = React.createClass({
       "expiration_year": this.refs.expiration_year.value,
       "security_code": this.refs.security_code.value
     };
+
+    dispatch(donate(0, 0));
 
     Omise.createToken("card", card, (statusCode, response) => {
       if (response.object == "error") {
@@ -110,7 +113,7 @@ const App = React.createClass({
       </div>
     );
   }
-});
+};
 
 let routes = (
   <Router history={createBrowserHistory()}>
