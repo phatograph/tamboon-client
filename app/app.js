@@ -4,6 +4,8 @@ import ReactRouter from 'react-router';
 import { Router, Route, Link } from 'react-router';
 let createBrowserHistory = require('history/lib/createBrowserHistory');
 
+import CharitiesList from './components/CharitiesList';
+
 import style from './../css/style.css';
 
 const host = 'http://localhost:4001';
@@ -76,21 +78,7 @@ const App = React.createClass({
       <div className={style.container}>
         <form onSubmit={this.onSubmit}>
           <h2 className={style.label}>Pick a charity:</h2>
-          <ul className={style.list}>
-            {this.state.charities.map((charity, i) => {
-              return (
-                <li key={i}>
-                  <input type="radio" name="charity" ref="charity" value={charity.id} id={`c${charity.id}`} />
-                  <label htmlFor={`c${charity.id}`}>{charity.name}</label>
-                </li>
-              );
-            })}
-            <li>
-              <input type="radio" name="charity" ref="charity" value="-1" id="c-1" defaultChecked />
-              <label htmlFor="c-1">Random</label>
-            </li>
-          </ul>
-
+          <CharitiesList charities={this.state.charities} />
           <div>
             <label className={style.labelList} htmlFor="amount">Amount</label>
             <input type="number" ref="amount" id="amount" defaultValue="500" step="any" /> THB
@@ -118,8 +106,8 @@ const App = React.createClass({
             <div id="cc_error" className={style.flashError}></div>
             <div id="flash_success" className={style.flashSuccess}></div>
           </div>
-          </form>
-        </div>
+        </form>
+      </div>
     );
   }
 });
