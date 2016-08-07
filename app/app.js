@@ -9,7 +9,7 @@ import style from './../css/style.css';
 const host = 'http://localhost:4001';
 Omise.setPublicKey(process.env.OMISE_PKEY);
 
-let App = React.createClass({
+const App = React.createClass({
   getInitialState() {
     return {
       charities: []
@@ -18,7 +18,8 @@ let App = React.createClass({
   componentDidMount() {
     fetch(`${host}/charities`)
       .then((res) => { return res.json(); })
-      .then((body) => { this.setState({ charities: body }); });
+      .then((body) => { this.setState({ charities: body }); })
+      .catch((e) => { document.querySelector('#cc_error').innerHTML = e; })
   },
   resetFlash() {
     document.querySelector('#flash_success').innerHTML = '';
@@ -65,7 +66,8 @@ let App = React.createClass({
             else {
               document.querySelector('#flash_success').innerHTML = json.message;
             }
-          });
+          })
+          .catch((e) => { document.querySelector('#cc_error').innerHTML = e; })
       };
     });
   },
